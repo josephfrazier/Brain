@@ -12,14 +12,34 @@ Brain brain(Serial);
 void setup() {
     // Start the hardware serial.
     Serial.begin(9600);
+    pinMode(LED_BUILTIN, OUTPUT);
+
 }
 
 void loop() {
     // Expect packets about once per second.
     // The .readCSV() function returns a string (well, char*) listing the most recent brain data, in the following format:
-    // "signal strength, attention, meditation, delta, theta, low alpha, high alpha, low beta, high beta, low gamma, high gamma"    
-    if (brain.update()) {
-        Serial.println(brain.readErrors());
-        Serial.println(brain.readCSV());
+    // "signal strength, attention, meditation, delta, theta, low alpha, high alpha, low beta, high beta, low gamma, high gamma"
+    if (!brain.update()) {
+        digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+        return;
     }
+
+    digitalWrite(LED_BUILTIN, HIGH);    // turn the LED on
+    Serial.println(brain.readErrors());
+
+    char* str = brain.readCSV();
+    Serial.println(str);
+
+    // http://www.cplusplus.com/reference/cstring/strtok/
+    char * pch;
+    printf ("Splitting string \"%s\" into tokens:\n",str);
+    pch = strtok (str," ,.-");
+    while (pch != NULL)
+    {
+      printf ("%s\n",pch);
+      pch = strtok (NULL, " ,.-");
+    }
+
+    delay(100);                       // wait for a bit
 }
