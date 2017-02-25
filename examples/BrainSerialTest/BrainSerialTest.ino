@@ -10,12 +10,24 @@
 Brain brain(Serial);
 
 const int firePin  =  8;     //use digital I/O pin 8
+const int chargePin  =  4;     //use digital I/O pin 4
+
+int chargeCount = 0;
+const int chargeMax = 5;
 
 void setup() {
     // Start the hardware serial.
     Serial.begin(9600);
     pinMode(LED_BUILTIN, OUTPUT);
     pinMode(firePin,OUTPUT);   //set pin 8 to be an output output
+    pinMode(chargePin,OUTPUT);   //set pin 4 to be an output output
+}
+
+void charge() {
+  if (chargeCount < chargeMax) {
+    digitalWrite(chargePin,HIGH);    //set pin 8 LOW, turning off LED
+    chargeCount = chargeCount + 1;
+  }
 }
 
 void loop() {
@@ -25,6 +37,7 @@ void loop() {
     if (!brain.update()) {
         digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
         digitalWrite(firePin,LOW);    //set pin 8 LOW, turning off LED
+        digitalWrite(chargePin,LOW);    //set pin 8 LOW, turning off LED
 
         return;
     }
@@ -46,9 +59,12 @@ void loop() {
         if (0 < val && val < 40) {
           digitalWrite(LED_BUILTIN, HIGH);    // turn the LED on
           digitalWrite(firePin,HIGH);   //set pin 8 HIGH, turning on LED
+          digitalWrite(chargePin,LOW);
+          chargeCount = 0;
         } else {
           digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
           digitalWrite(firePin,LOW);    //set pin 8 LOW, turning off LED
+          charge();
         }
       }
 
