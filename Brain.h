@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-#define MAX_PACKET_LENGTH 256
+#define MAX_PACKET_LENGTH 1024
 #define EEG_POWER_BANDS 8
 
 class Brain {

@@ -34,12 +34,12 @@ void loop() {
     // http://www.cplusplus.com/reference/cstring/strtok/
     char * pch;
     printf ("Splitting string \"%s\" into tokens:\n",str);
-    pch = strtok (str," ,.-");
+    pch = strtok(str," ,.-");
     while (pch != NULL)
     {
-      printf ("%s\n",pch);
-      pch = strtok (NULL, " ,.-");
+      Serial.println(pch);
+      pch = strtok(NULL, " ,.-");
     }
-
-    delay(100);                       // wait for a bit
+ 
+    delay(200);                       // wait for a bit
 }
