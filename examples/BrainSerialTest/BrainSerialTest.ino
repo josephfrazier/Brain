@@ -26,6 +26,7 @@ void setup() {
 void charge() {
   if (chargeCount < chargeMax) {
     digitalWrite(chargePin,HIGH);    //set pin 8 LOW, turning off LED
+    digitalWrite(LED_BUILTIN, HIGH);    // turn the LED on
     chargeCount = chargeCount + 1;
   }
 }
@@ -57,7 +58,6 @@ void loop() {
       if (i == 2) {
         int val = atoi(pch);
         if (0 < val && val < 40) {
-          digitalWrite(LED_BUILTIN, HIGH);    // turn the LED on
           digitalWrite(firePin,HIGH);   //set pin 8 HIGH, turning on LED
           digitalWrite(chargePin,LOW);
           chargeCount = 0;
