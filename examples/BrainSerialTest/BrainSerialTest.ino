@@ -36,11 +36,11 @@ void loop() {
 
     // http://www.cplusplus.com/reference/cstring/strtok/
     char * pch;
-    printf ("Splitting string \"%s\" into tokens:\n",str);
     int i = 0;
     pch = strtok(str," ,.-");
     while (pch != NULL)
     {
+      // look for the "meditation" value, per http://www.frontiernerds.com/brain-hack
       if (i == 2) {
         int val = atoi(pch);
         if (0 < val && val < 40) {
