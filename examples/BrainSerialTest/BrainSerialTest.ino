@@ -48,14 +48,14 @@ void loop() {
           digitalWrite(led,HIGH);   //set pin 8 HIGH, turning on LED
         } else {
           digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-          digitalWrite(led,LOW);    //set pin 8 LOW, turning off LED      
+          digitalWrite(led,LOW);    //set pin 8 LOW, turning off LED
         }
       }
-      
+
       Serial.println(pch);
       pch = strtok(NULL, " ,.-");
       i = i + 1;
     }
- 
+
     delay(200);                       // wait for a bit
 }
