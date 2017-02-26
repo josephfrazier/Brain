@@ -53,8 +53,11 @@ void loop() {
 
     Serial.println(brain.readErrors());
 
+    Serial.println("chargeCount:");
+    Serial.println(chargeCount);
+    Serial.println();
+
     char* str = brain.readCSV();
-    Serial.println(str);
 
     // http://www.cplusplus.com/reference/cstring/strtok/
     char * pch;
@@ -64,6 +67,9 @@ void loop() {
     {
       // look for the "meditation" value, per http://www.frontiernerds.com/brain-hack
       if (i == 2) {
+        Serial.println("meditation:");
+        Serial.println(pch);
+        Serial.println();
         int val = atoi(pch);
         if (0 < val && val < 40) {
           fire();
@@ -74,7 +80,6 @@ void loop() {
         }
       }
 
-      Serial.println(pch);
       pch = strtok(NULL, " ,.-");
       i = i + 1;
     }
