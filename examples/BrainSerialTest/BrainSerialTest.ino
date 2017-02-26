@@ -46,7 +46,6 @@ void loop() {
     if (!brain.update()) {
         digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
         digitalWrite(firePin,LOW);    //set pin 8 LOW, turning off LED
-        digitalWrite(chargePin,LOW);    //set pin 8 LOW, turning off LED
 
         return;
     }
@@ -56,6 +55,8 @@ void loop() {
     Serial.println("chargeCount:");
     Serial.println(chargeCount);
     Serial.println();
+
+    charge();
 
     char* str = brain.readCSV();
 
@@ -76,7 +77,6 @@ void loop() {
         } else {
           digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
           digitalWrite(firePin,LOW);    //set pin 8 LOW, turning off LED
-          charge();
         }
       }
 
