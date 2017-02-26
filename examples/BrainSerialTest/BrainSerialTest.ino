@@ -31,6 +31,14 @@ void charge() {
   }
 }
 
+void fire() {
+  if (chargeCount == chargeMax) {
+    digitalWrite(firePin,HIGH);   //set pin 8 HIGH, turning on LED
+    digitalWrite(chargePin,LOW);
+    chargeCount = 0;
+  }
+}
+
 void loop() {
     // Expect packets about once per second.
     // The .readCSV() function returns a string (well, char*) listing the most recent brain data, in the following format:
@@ -58,9 +66,7 @@ void loop() {
       if (i == 2) {
         int val = atoi(pch);
         if (0 < val && val < 40) {
-          digitalWrite(firePin,HIGH);   //set pin 8 HIGH, turning on LED
-          digitalWrite(chargePin,LOW);
-          chargeCount = 0;
+          fire();
         } else {
           digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
           digitalWrite(firePin,LOW);    //set pin 8 LOW, turning off LED
