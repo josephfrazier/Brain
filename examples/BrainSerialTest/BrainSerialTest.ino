@@ -13,7 +13,7 @@ const int firePin  =  8;     //use digital I/O pin 8
 const int chargePin  =  4;     //use digital I/O pin 4
 
 int chargeCount = 0;
-const int chargeMax = 5;
+const int chargeMax = 10;
 
 void setup() {
     // Start the hardware serial.
